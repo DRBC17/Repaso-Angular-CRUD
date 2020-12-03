@@ -1,5 +1,6 @@
 {
   "name": "practica-gui-angular",
+  "author": "Diego Buezo",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
