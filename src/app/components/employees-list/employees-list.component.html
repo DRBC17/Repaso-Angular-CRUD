@@ -1,0 +1,107 @@
+<div>
+  <div *ngIf="alertab" class="alert {{ alertab.tipo }} m-2" role="alert">
+    {{ alertab.mensaje }}
+  </div>
+  <div class="p-2">
+    <form #employeeForm="ngForm" (ngSubmit)="crear_empleado()">
+      <input type="hidden" name="_id" id="_id" [(ngModel)]="empleado._id" />
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Ingrese un nombre"
+          required
+          name="name"
+          [(ngModel)]="empleado.name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="position">Position:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="position"
+          placeholder="Ingrese una position"
+          required
+          name="position"
+          [(ngModel)]="empleado.position"
+        />
+      </div>
+      <div class="form-group">
+        <label for="office">Office: </label>
+        <input
+          type="text"
+          class="form-control"
+          id="office"
+          placeholder="Ingrese una office"
+          required
+          name="office"
+          [(ngModel)]="empleado.office"
+        />
+      </div>
+      <div class="form-group">
+        <label for="salary">Salary: </label>
+        <input
+          type="number"
+          class="form-control"
+          id="salary"
+          placeholder="Ingrese una salary"
+          required
+          name="salary"
+          [(ngModel)]="empleado.salary"
+        />
+      </div>
+      <button class="btn btn-warning m-1" (click)="resetForm()">Reset</button>
+
+      <ng-container *ngIf="!empleado._id; else elseBtn">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </ng-container>
+      <ng-template #elseBtn>
+        <a
+          #btnEditar
+          class="btn btn-success"
+          (click)="editar_empleado(empleado._id)"
+          >Guardar</a
+        >
+      </ng-template>
+    </form>
+  </div>
+  <div>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Position</th>
+          <th scope="col">Office</th>
+          <th scope="col">Salario</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let empleado of empleados; let i = index">
+        <tr>
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ empleado.name }}</td>
+          <td>{{ empleado.position }}</td>
+          <td>{{ empleado.office }}</td>
+          <td>{{ empleado.salary }}</td>
+          <td>
+            <button
+              class="btn btn-warning btn-sm m-1"
+              (click)="cargar_empleado(empleado)"
+            >
+              Editar</button
+            ><button
+              class="btn btn-danger btn-sm m-1"
+              (click)="eliminar_empleado(empleado._id)"
+            >
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
